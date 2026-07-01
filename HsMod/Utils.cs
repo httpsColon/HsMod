@@ -1246,7 +1246,7 @@ namespace HsMod
             Utils.CacheLoginStatus = true;
             try
             {
-                ShowEula();
+                //ShowEula();
                 if (!isIdleKickEnable.Value)
                 {
                     InactivePlayerKicker.Get()?.SetShouldCheckForInactivity(isIdleKickEnable.Value);
