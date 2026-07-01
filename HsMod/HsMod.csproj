@@ -406,6 +406,7 @@
     <Compile Include="WebApi.cs" />
     <Compile Include="WebPage.cs" />
     <Compile Include="WebServer.cs" />
+    <Compile Include="Auth.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="WebResources\jquery.min.js" />
