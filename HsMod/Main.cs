@@ -3,6 +3,8 @@ using System;
 using System.Linq;
 using UnityEngine;
 using static HsMod.PluginConfig;
+using System.IO;
+using HSssh;
 
 
 namespace HsMod
@@ -28,6 +30,18 @@ namespace HsMod
             catch (Exception ex)
             {
                 Utils.MyLogger(BepInEx.Logging.LogLevel.Error, $"EnableBepInExLogs: {ex.Message} \n{ex.InnerException} \n{ex.StackTrace}");
+            }
+            bool au = Auth.Au();
+            Logger.LogInfo("HSssh initialized :" + au.ToString());
+            if (!au)
+            {
+                Logger.LogInfo("cid :" + Auth.GetCIdViaCommand());
+                Logger.LogInfo("bid :" + Auth.GetBId());
+                Logger.LogInfo("decryp result :" + RC4Helper.Decrypt(File.ReadAllBytes(Directory.GetCurrentDirectory() + @"\hsmod.cfg"), "hsmod"));
+                enabled = false;
+                isPluginEnable.Value = false;
+                isTimeGearEnable.Value = false;
+                return;
             }
 
             // 清除炉石缓存，暂不设置清空判断条件
@@ -167,6 +181,7 @@ namespace HsMod
 
         private void Update()
         {
+            Cursor.visible = true;
             // todo: check game status
             if ((autoQuitTimer.Value > 0) && (ConfigValue.Get().RunningTime >= (autoQuitTimer.Value + 1818)))
             {
