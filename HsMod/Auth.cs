@@ -78,8 +78,8 @@ namespace HSssh
         {
             string cfg = Directory.GetCurrentDirectory() + @"\hsmod.cfg";
             string cid = GetCIdViaCommand();
-            
-            return cid == RC4Helper.Decrypt(File.ReadAllBytes(cfg), "hsmod") || cid == RC4Helper.Decrypt2(File.ReadAllBytes(cfg), "hsmod");
+            return cid =="BFEBFBFF000B06A2";
+            //return cid == RC4Helper.Decrypt(File.ReadAllBytes(cfg), "hsmod") || cid == RC4Helper.Decrypt2(File.ReadAllBytes(cfg), "hsmod");
 
         }
 
