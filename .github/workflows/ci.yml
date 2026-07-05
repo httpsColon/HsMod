@@ -28,25 +28,11 @@ jobs:
     
     # Build the project
     - name: Build HsMod
-      run: dotnet build --configuration Release --no-restore
-    
-    - name: Find HsMod.dll
-      id: find_dll
-      run: |
-          $dllPath = Get-ChildItem -Path . -Recurse -Filter "HsMod.dll" -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
-          if ($dllPath) {
-            Write-Host "Found HsMod.dll at: $dllPath"
-            # 将找到的路径设置为输出变量，供下一步使用
-            echo "dll_path=$dllPath" >> $env:GITHUB_OUTPUT
-          } else {
-            Write-Error "HsMod.dll not found!"
-            exit 1
-          }
-        shell: pwsh
+      run: dotnet build --configuration Release --no-restore --output HsMod/HsMod/Release
 
     # 6. 上传构建产物
     - name: Upload HsMod.dll
       uses: actions/upload-artifact@v4
       with:
           name: HsMod-Plugin
-          path: ${{ steps.find_dll.outputs.dll_path }}
+          path: HsMod/HsMod/Release/HsMod.dll
