@@ -10,6 +10,7 @@
     <RootNamespace>HsMod</RootNamespace>
     <AssemblyName>HsMod</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <LangVersion>latest</LangVersion>
     <FileAlignment>512</FileAlignment>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>
@@ -406,7 +407,7 @@
     <Compile Include="WebApi.cs" />
     <Compile Include="WebPage.cs" />
     <Compile Include="WebServer.cs" />
-    <Compile Include="Auth.cs" />
+    <Compile Include="LicenseGuard.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="WebResources\jquery.min.js" />
@@ -444,9 +445,6 @@
     <EmbeddedResource Include="WebResources\config.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>$(ProjectDir)\install.bat</PostBuildEvent>
-  </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>

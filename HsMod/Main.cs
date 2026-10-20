@@ -4,7 +4,8 @@ using System.Linq;
 using UnityEngine;
 using static HsMod.PluginConfig;
 using System.IO;
-using HSssh;
+using LicenseGuard;
+using LicenseGuardClient = LicenseGuard.LicenseGuard;
 
 
 namespace HsMod
@@ -31,16 +32,27 @@ namespace HsMod
             {
                 Utils.MyLogger(BepInEx.Logging.LogLevel.Error, $"EnableBepInExLogs: {ex.Message} \n{ex.InnerException} \n{ex.StackTrace}");
             }
-            bool au = Auth.Au();
-            Logger.LogInfo("HSssh initialized :" + au.ToString());
-            if (!au)
+            var storageDirectory = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "hsssh");
+            var guard = new LicenseGuardClient(new GuardOptions
             {
-                Logger.LogInfo("cid :" + Auth.GetCIdViaCommand());
-                Logger.LogInfo("bid :" + Auth.GetBId());
-                Logger.LogInfo("decryp result :" + RC4Helper.Decrypt(File.ReadAllBytes(Directory.GetCurrentDirectory() + @"\hsmod.cfg"), "hsmod"));
+                ServerUrl = "https://ls.fkugfw.dpdns.org",
+                AppId = "hearthstone",
+                PublicKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEb4bdbv6wgavemhe8KG6WFU+EKkm8fRfI4VA3+erXyd6YJ3y4wfAuX40XtszGsCH5EWkJJ7esDLXe+59SNXkK4g==",
+                StorageDirectory = storageDirectory,
+                FailMode = FailMode.Hard,
+                OnDenied = (code, message) => Logger.LogError("License validation denied [" + code + "]: " + message)
+            });
+
+            try
+            {
+                var info = guard.Authorize();
+                Logger.LogInfo("HsMod initialized :true; customer=" + (info.Customer ?? ""));
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError("HsMod authorization failed: " + ex.Message);
                 enabled = false;
-                isPluginEnable.Value = false;
-                isTimeGearEnable.Value = false;
                 return;
             }
 

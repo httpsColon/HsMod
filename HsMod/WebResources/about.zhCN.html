@@ -228,7 +228,7 @@ drwxrwxr-x 3 a a 4.0K Jan 12 10:47 Strings
     <li>本插件Web Server（即Showinfo）的默认端口为58744，一般情况下，监听本地所有IP，使用云服务器时，请注意防火墙、安全组等配置。</li>
     <li>对局统计所使用的log文件是<code>BepInEx\HsMatch.log</code>，可在设置中修改。（字段以<code>,</code>分隔）</li>
     <li>出现问题时先尝试删除相关<code>.cfg</code>配置文件（一般位于<code>BepInEx\config\</code>），进行重新配置；如果依然存在问题，请带上<code>HsMod.cfg</code>提交<a href='https://github.com/Pik-4/HsMod/issues'>Issues</a>，但不保证及时解答。</li>
-    <li><code>GetHsLib.py</code>用于更新炉石自有运行库，<code>install.bat</code>用于将编译好的<code>HsMod.dll</code>复制到默认炉石目录（前提是BepInEx已经配置好）。此外，在push修改版本号后（PluginInfo.cs发生变化后），会自动生成<a href='https://github.com/Pik-4/HsMod/releases'>release</a>。</li>
+    <li><code>GetHsLib.py</code>用于更新炉石自有运行库。编译后请手动将<code>Release\HsMod.dll</code>复制到<code>Hearthstone\BepInEx\plugins</code>。此外，在push修改版本号后（PluginInfo.cs发生变化后），会自动生成<a href='https://github.com/Pik-4/HsMod/releases'>release</a>。</li>
     <li>如果出现皮肤显示异常，请检查<code>HsSkins.cfg</code>，并尝试删除<code>HsMod.cfg</code>重新进行配置。</li>
     <li>如果修改设置无法保存，请检查是否启用其他炉石插件。</li>
     <li>BepInEx请选择<strong>BepInEx 5</strong>，由于BepInEx 6目前还在pre-release，暂时不做适配。</li>

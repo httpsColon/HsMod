@@ -223,7 +223,7 @@ Hearthstone version update does not necessarily cause HsMod to fail, if HsMod pl
 6. The default port of this plug-in Web Server (i.e. Showinfo) is 58744, in general, listening to all local IPs, when using cloud servers, please pay attention to the configuration of firewalls, security groups and so on.
 7. The log file used for logging statistics is `BepInEx\HsMatch.log`, which can be modified in the settings. (Fields are ` separated` by `,`)
 8. When a problem occurs first try to delete the relevant `.cfg` configuration file (usually located in `BepInEx\config\` ) and reconfigure; if the problem still exists, please bring `HsMod.cfg` to submit [Issues](https://github.com/Pik-4/HsMod/issues), but there is no guarantee of a timely answer.
-9. `GetHsLib.py` is used to update Hearthstone's own runtime libraries, and `install.bat` is used to copy the compiled `HsMod.dll` to the default Hearthstone directory (provided BepInEx has been configured). In addition, after push changes the version number (after PluginInfo.cs changes), [a release](https://github.com/Pik-4/HsMod/releases) is automatically generated.
+9. `GetHsLib.py` is used to update Hearthstone's own runtime libraries. After building, manually copy `Release\HsMod.dll` to `Hearthstone\BepInEx\plugins`. In addition, after push changes the version number (after PluginInfo.cs changes), [a release](https://github.com/Pik-4/HsMod/releases) is automatically generated.
 10. If the skin display is abnormal, please check `HsSkins.cfg` and try to delete `HsMod.cfg` to re-configure it.
 11. If the modified settings can not be saved, please check if other Hearthstone plugins are enabled.
 12. For BepInEx, please choose **BepInEx 5**. Since BepInEx 6 is still in pre-release, it will not be adapted for now.
